@@ -1,0 +1,57 @@
+<!-- templates/teacher_dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen font-sans">
+    <nav class="bg-blue-600 text-white px-6 py-4 shadow">
+        <h1 class="text-2xl font-bold">📘 Smart Campus - Teacher Dashboard</h1>
+    </nav>
+
+    <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Assignment -->
+        <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition">
+            <h2 class="text-xl font-semibold text-blue-600 mb-2">📑 Assignment</h2>
+            <p class="text-gray-600">Create, view and manage assignments.</p>
+            <!-- <a href="" class="inline-block mt-4 text-sm text-blue-500 hover:underline">Go to Assignments</a> -->
+            <a href="{{ url_for('assignments') }}">Go to Assignments</a>
+
+        </div>
+
+        <!-- Attendance -->
+        <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition">
+            <h2 class="text-xl font-semibold text-green-600 mb-2">✅ Attendance</h2>
+            <p class="text-gray-600">Take or review attendance records.</p>
+            <!-- <a href="#"inline-block mt-4 text-sm text-green-500 hover:underline">Go to Attendance</a> -->
+            <a href="{{ url_for('attendance') }}" class="btn btn-success">Go to Attendance</a>
+
+            <!-- <a href="/assignments" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300"> -->
+                
+              
+              
+        </div>
+
+        <!-- Test -->
+        <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition">
+            <h2 class="text-xl font-semibold text-yellow-600 mb-2">📝 Test</h2>
+            <p class="text-gray-600">Create and evaluate tests.</p>
+            <!-- <a href="#" class="inline-block mt-4 text-sm text-yellow-500 hover:underline">Go to Tests</a> -->
+            <a href="{{ url_for('test') }}" class="btn btn-warning">Go to Test</a>
+
+        </div>
+
+        <!-- Notices -->
+        <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition">
+            <h2 class="text-xl font-semibold text-red-600 mb-2">📢 Notices</h2>
+            <p class="text-gray-600">Post or view important notices.</p>
+            <!-- <a href="#" class="inline-block mt-4 text-sm text-red-500 hover:underline">Go to Notices</a> -->
+            <a href="{{ url_for('notice') }}" class="btn btn-danger">Go to Notice</a>
+
+        </div>
+    </div>
+</body>
+</html>
+
