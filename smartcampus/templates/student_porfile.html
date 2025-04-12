@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Profile</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #e3f2fd, #fce4ec);
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .profile-card {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    .profile-header {
+      background: linear-gradient(to right, #1976d2, #42a5f5);
+      color: white;
+      padding: 40px 20px 70px;
+      text-align: center;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      position: relative;
+    }
+    .profile-img {
+      width: 130px;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid white;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -65px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    .profile-body {
+      padding: 100px 30px 40px;
+    }
+    .info-label {
+      font-weight: 600;
+      color: #333;
+    }
+    .edit-btn {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-card">
+    <div class="profile-header">
+      <h2>Arka Jain University</h2>
+      <h4 class="mt-1">Student Profile</h4>
+      <img id="profileImage" src="https://i.ibb.co/6ZzJxym/student.png" alt="Profile Picture" class="profile-img" />
+    </div>
+    <div class="profile-body text-center">
+      <h4 id="nameDisplay">Tech Dynamos Beta</h4>
+      <p class="text-muted" id="branchDisplay">Computer Science</p>
+
+      <button class="btn btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editModal">
+        <i class="bi bi-pencil-square"></i> Edit Profile
+      </button>
+
+      <div class="row mt-4">
+        <div class="col-md-6 text-start">
+          <p><span class="info-label">Enrollment No:</span> <span id="enrollmentDisplay">aju230423</span></p>
+          <p><span class="info-label">Year:</span> <span id="yearDisplay">2nd</span></p>
+        </div>
+        <div class="col-md-6 text-start">
+          <p><span class="info-label">Email:</span> <span id="emailDisplay">ankit@gmail.com</span></p>
+          <p><span class="info-label">Contact:</span> <span id="contactDisplay">1234567890</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Modal -->
+  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">Edit Profile</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editForm">
+            <div class="mb-3">
+              <label for="editName" class="form-label">Name</label>
+              <input type="text" class="form-control" id="editName" required />
+            </div>
+            <div class="mb-3">
+              <label for="editBranch" class="form-label">Branch</label>
+              <input type="text" class="form-control" id="editBranch" required />
+            </div>
+            <div class="mb-3">
+              <label for="editEnrollment" class="form-label">Enrollment No</label>
+              <input type="text" class="form-control" id="editEnrollment" required />
+            </div>
+            <div class="mb-3">
+              <label for="editYear" class="form-label">Year</label>
+              <input type="text" class="form-control" id="editYear" required />
+            </div>
+            <div class="mb-3">
+              <label for="editEmail" class="form-label">Email</label>
+              <input type="email" class="form-control" id="editEmail" required />
+            </div>
+            <div class="mb-3">
+              <label for="editContact" class="form-label">Contact</label>
+              <input type="text" class="form-control" id="editContact" required />
+            </div>
+            <div class="mb-3">
+              <label for="editImage" class="form-label">Profile Image</label>
+              <input type="file" class="form-control" id="editImage" accept="image/*" />
+            </div>
+            <button type="submit" class="btn btn-success w-100">Save Changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const editForm = document.getElementById("editForm");
+    const profileImage = document.getElementById("profileImage");
+
+    editForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      document.getElementById("nameDisplay").innerText = editForm.editName.value;
+      document.getElementById("branchDisplay").innerText = editForm.editBranch.value;
+      document.getElementById("enrollmentDisplay").innerText = editForm.editEnrollment.value;
+      document.getElementById("yearDisplay").innerText = editForm.editYear.value;
+      document.getElementById("emailDisplay").innerText = editForm.editEmail.value;
+      document.getElementById("contactDisplay").innerText = editForm.editContact.value;
+
+      const file = editForm.editImage.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          profileImage.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+
+      const modal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
+      modal.hide();
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

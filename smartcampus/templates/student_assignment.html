@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Submit Assignment | ERP</title>
+
+  <!-- Bootstrap + Fonts + Lottie -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+  <style>
+    body {
+      background: url('https://images.unsplash.com/photo-1496307653780-42ee777d4833?auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 0;
+    }
+
+    header.hero-section {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 3rem 1rem 1rem;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      color: #00eaff;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      color: #aaa;
+    }
+
+    .container-custom {
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+      margin: 2rem auto;
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(25px);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+    }
+
+    .title {
+      text-align: center;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      color: #00eaff;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      color: #ccc;
+      font-weight: 500;
+    }
+
+    .btn-submit {
+      background: linear-gradient(to right, #00f0ff, #0072ff);
+      color: #fff;
+      border: none;
+      padding: 0.75rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease-in-out;
+      width: 100%;
+    }
+
+    .btn-submit:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    }
+
+    .thank-you {
+      text-align: center;
+      color: #a6fca6;
+      font-weight: 600;
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      display: none;
+    }
+
+    .preview-file {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    .lottie-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .quote-box {
+      font-size: 1rem;
+      color: #eee;
+      text-align: center;
+      margin-top: 1rem;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <header class="hero-section">
+    <h1 class="hero-title">📚 Student ERP Portal</h1>
+    <p class="hero-subtitle">Welcome to your digital workspace — Submit with confidence!</p>
+  </header>
+
+  <div class="container container-custom">
+    <h2 class="title">🚀 Submit Assignment</h2>
+
+    <div class="lottie-wrap">
+      <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_bdlrkrqv.json" background="transparent" speed="1" style="width: 150px; height: 150px;" loop autoplay></lottie-player>
+    </div>
+
+    <!-- <form id="assignmentForm" method="POST" action="/submit-assignment" enctype="multipart/form-data">
+
+      <div class="mb-3">
+        <label for="topic" class="form-label">Assignment Topic</label>
+        <select id="topic" class="form-select" required>
+          <option selected disabled>Choose a Topic</option>
+          <option>Science - Life on Mars</option>
+          <option>History - World War II</option>
+          <option>Math - Linear Algebra</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="file" class="form-label">Upload File</label>
+        <input type="file" id="file" class="form-control" accept=".pdf,.docx,.pptx" required />
+        <div class="preview-file" id="filePreview">No file selected</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="notes" class="form-label">Optional Notes</label>
+        <textarea id="notes" class="form-control" rows="3" placeholder="Any message for your teacher?"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-submit">📤 Submit Assignment</button>
+    </form> -->
+    <!-- <form id="assignmentForm" method="POST" action="submit.php" enctype="multipart/form-data"> -->
+
+    <form id="assignmentForm" method="POST" action="submit.php" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="topic" class="form-label">Assignment Topic</label>
+        <select id="topic" name="topic" class="form-select" required>
+          <option selected disabled>Choose a Topic</option>
+          <option>Science - Life on Mars</option>
+          <option>History - World War II</option>
+          <option>Math - Linear Algebra</option>
+        </select>
+      </div>
+    
+      <div class="mb-3">
+        <label for="file" class="form-label">Upload File</label>
+        <input type="file" id="file" name="file" class="form-control" accept=".pdf,.docx,.pptx" required />
+        <div class="preview-file" id="filePreview">No file selected</div>
+      </div>
+    
+      <div class="mb-3">
+        <label for="notes" class="form-label">Optional Notes</label>
+        <textarea id="notes" name="notes" class="form-control" rows="3" placeholder="Any message for your teacher?"></textarea>
+      </div>
+    
+      <button type="submit" class="btn btn-submit">📤 Submit Assignment</button>
+    </form>
+    
+
+    <div class="thank-you" id="thankYou">
+      🎉 Assignment Submitted Successfully! You're a star!
+    </div>
+    <!-- {% if success %}
+  <div class="thank-you" style="display:block;">🎉 Assignment Submitted Successfully!</div>
+{% else %}
+  <div class="thank-you" style="display:none;">🎉 Assignment Submitted Successfully!</div>
+{% endif %} -->
+
+
+    <div class="quote-box">
+      “Every file you submit brings you one step closer to your dream.” 💡
+    </div>
+  </div>  <script>
+    const form = document.getElementById('assignmentForm');
+    const thankYou = document.getElementById('thankYou');
+    const fileInput = document.getElementById('file');
+    const filePreview = document.getElementById('filePreview');
+
+    fileInput.addEventListener('change', function () {
+      const file = fileInput.files[0];
+
+      if (file) {
+        const maxSize = 3 * 1024 * 1024; // 3MB in bytes
+        if (file.size > maxSize) {
+          alert("🚫 File is too large! Maximum allowed size is 3 MB.");
+          fileInput.value = "";
+          filePreview.textContent = "No file selected";
+        } else {
+          const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
+          filePreview.textContent = `Selected: ${file.name} (${sizeInMB} MB)`;
+        }
+      } else {
+        filePreview.textContent = "No file selected";
+      }
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      form.style.display = 'none';
+      thankYou.style.display = 'block';
+      confetti({
+        particleCount: 200,
+        spread: 100,
+        origin: { y: 0.6 }
+      });
+    });
+  </script>
+
+  <!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+

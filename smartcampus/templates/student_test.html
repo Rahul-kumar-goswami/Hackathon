@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Student Test System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #eef3f9;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .card {
+      border-radius: 15px;
+      margin-top: 40px;
+    }
+    .question-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    #testSection {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Select Section -->
+  <div class="card shadow" id="selectSection">
+    <div class="card-header bg-dark text-white text-center">
+      <h3>📘 Select Subject & Test Type</h3>
+    </div>
+    <div class="card-body">
+      <form id="selectForm">
+        <div class="mb-3">
+          <label for="subject" class="form-label">Choose Subject</label>
+          <select class="form-select" id="subject" required>
+            <option value="">-- Select --</option>
+            <option value="Maths">Mathematics</option>
+            <option value="Science">Science</option>
+            <option value="English">English</option>
+            <option value="GK">General Knowledge</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="type" class="form-label">Choose Test Type</label>
+          <select class="form-select" id="type" required>
+            <option value="">-- Select --</option>
+            <option value="mcq">MCQ (Objective)</option>
+            <option value="subjective">Subjective</option>
+            <option value="descriptive">Descriptive</option>
+          </select>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary px-4">Start Test</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Test Section -->
+  <div class="card shadow" id="testSection">
+    <div class="card-header bg-primary text-white text-center">
+      <h4 id="testTitle">Test Title</h4>
+    </div>
+    <div class="card-body">
+      <form id="testForm">
+        <div id="questionArea">
+          <!-- Dynamic questions will load here -->
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-success btn-lg">Submit Test</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  const selectForm = document.getElementById("selectForm");
+  const selectSection = document.getElementById("selectSection");
+  const testSection = document.getElementById("testSection");
+  const testTitle = document.getElementById("testTitle");
+  const questionArea = document.getElementById("questionArea");
+
+  selectForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const subject = document.getElementById("subject").value;
+    const type = document.getElementById("type").value;
+
+    if (!subject || !type) return;
+
+    // Hide select, show test
+    selectSection.style.display = "none";
+    testSection.style.display = "block";
+
+    // Update title
+    // testTitle.innerText = Subject: ${subject.toUpperCase()} | Test Type: ${type.toUpperCase()};
+    testTitle.innerText = `Subject: ${subject.toUpperCase()} | Test Type: ${type.toUpperCase()}`;
+
+
+    // Load Questions
+    if (type === "mcq") {
+      questionArea.innerHTML = `
+        <div class="question-box">
+          <h5>1. What is the capital of India?</h5>
+          <div class="form-check"><input class="form-check-input" type="radio" name="q1" value="A"><label class="form-check-label">Mumbai</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="q1" value="B"><label class="form-check-label">New Delhi</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="q1" value="C"><label class="form-check-label">Kolkata</label></div>
+        </div>
+        <div class="question-box">
+          <h5>2. What is 5 × 3?</h5>
+          <div class="form-check"><input class="form-check-input" type="radio" name="q2" value="A"><label class="form-check-label">15</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="q2" value="B"><label class="form-check-label">10</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="q2" value="C"><label class="form-check-label">8</label></div>
+        </div>
+      `;
+    } else {
+      questionArea.innerHTML = `
+        <div class="question-box">
+          <h5>1. Explain the process of ${subject} in your own words.</h5>
+          <textarea class="form-control" name="q1" rows="4" required></textarea>
+        </div>
+        <div class="question-box">
+          <h5>2. Write a short note on any important topic from ${subject}.</h5>
+          <textarea class="form-control" name="q2" rows="4" required></textarea>
+        </div>
+      `;
+    }
+  });
+
+  document.getElementById("testForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    alert("✅ Test submitted successfully!");
+    // Yahan backend POST kar sakte ho
+  });
+</script>
+
+</body>
+</html>
